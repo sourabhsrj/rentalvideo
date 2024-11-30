@@ -11,6 +11,10 @@
 	<groupId>com.example</groupId>
 	<artifactId>rentalvideo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>rentalvideo</module>
+	</modules>
 	<name>rentalvideo</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
