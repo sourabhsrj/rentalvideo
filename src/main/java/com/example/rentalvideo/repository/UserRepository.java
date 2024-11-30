@@ -1,11 +1,14 @@
 package com.example.rentalvideo.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.rentalvideo.models.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, String> {
-    User findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 }
+

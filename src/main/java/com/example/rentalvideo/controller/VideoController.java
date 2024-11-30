@@ -18,36 +18,29 @@ import com.example.rentalvideo.services.VideoService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
 @RestController
-@RequestMapping("/api/videos")
-@RequiredArgsConstructor
+@RequestMapping("/videos")
 public class VideoController {
-	
-	@Autowired
+
+    @Autowired
     private VideoService videoService;
 
     @GetMapping
-    public List<Video> getAllVideos() {
-        return videoService.getAllVideos();
+    public List<Video> getAvailableVideos() {
+        return videoService.getAvailableVideos();
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Video createVideo(@RequestBody @Valid Video video) {
-        return videoService.createVideo(video);
-    }
-
-    @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Video updateVideo(@PathVariable String id, @RequestBody @Valid Video video) {
-        return videoService.updateVideo(id, video);
+    public Video saveVideo(@RequestBody Video video) {
+        return videoService.save(video);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteVideo(@PathVariable String id) {
-        videoService.deleteVideo(id);
+    public void deleteVideo(@PathVariable Long id) {
+        videoService.delete(id);
     }
 }
+
 

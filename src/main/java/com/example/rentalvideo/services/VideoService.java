@@ -11,32 +11,20 @@ import com.example.rentalvideo.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class VideoService {
-	
-	@Autowired
+    @Autowired
     private VideoRepository videoRepository;
 
-    public List<Video> getAllVideos() {
-        return videoRepository.findAll();
+    public List<Video> getAvailableVideos() {
+        return videoRepository.findByAvailabilityStatus(true);
     }
 
-    public Video createVideo(Video video) {
+    public Video save(Video video) {
         return videoRepository.save(video);
     }
 
-    public Video updateVideo(String id, Video updatedVideo) {
-        return videoRepository.findById(id)
-                .map(video -> {
-                    video.setTitle(updatedVideo.getTitle());
-                    video.setDirector(updatedVideo.getDirector());
-                    video.setGenre(updatedVideo.getGenre());
-                    video.setAvailable(updatedVideo.isAvailable());
-                    return videoRepository.save(video);
-                }).orElseThrow(() -> new RuntimeException("Video not found"));
-    }
-
-    public void deleteVideo(String id) {
+    public void delete(Long id) {
         videoRepository.deleteById(id);
     }
 }
+
